@@ -1,5 +1,5 @@
 # Code Ready Containers on Fedora 32
-The following are my notes related to using CRC on Fedora 32. I am running this on an Intel NUC.
+The following are my notes related to using CRC on Fedora 32. I am running Fedora on an Intel NUC with 32GB of RAM.
 
 ## Considerations for Fedora 32
 The following actions are performed with SUDO or root.
@@ -89,3 +89,22 @@ For example to enable "6	prometheus-k8s" add the number "6". Note that the list 
 ```
 oc patch clusterversion/version --type='json' -p '[{"op":"remove", "path":"/spec/overrides/6"}]'
 ```
+
+## Installing ArgoCD on OpenShift
+You can used the attached scripts to install ArgoCD on OpenShift. Most info gained from this blog: https://www.openshift.com/blog/introduction-to-gitops-with-openshift
+
+First install the CLI tools as these are required by some of the scripts.
+```
+$ sudo ./ArgoCLI-Install.sh
+```
+Then run the following from a user account that is already connected to OpenShift with cluster admins:
+```
+$ ./OCP-ArgoCDInstall.sh
+```
+Take note of the output of the above for any errors and also for the admin password and Argo server URL.
+
+If you want to change the ArgoCD server password after, please use this providing the existing and new passwords when prompted:
+```
+$ ./OCP-ArgoCDPasswordChange.sh
+```
+
