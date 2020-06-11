@@ -1,3 +1,4 @@
+#!/bin/bash
 # Patch ArgoCD Server so no TLS is configured on the server (--insecure)
 
 PATCH='{"spec":{"template":{"spec":{"$setElementOrder/containers":[{"name":"argocd-server"}],"containers":[{"command":["argocd-server","--insecure","--staticassets","/shared/app"],"name":"argocd-server"}]}}}}'

@@ -1,3 +1,4 @@
+#!/bin/bash
 # Get ArgoCD Server Route Hostname
 
 ARGOCD_ROUTE=$(oc -n argocd get route argocd-server -o jsonpath='{.spec.host}')
@@ -8,4 +9,6 @@ argocd --insecure --grpc-web login ${ARGOCD_ROUTE}:443 --username admin --passwo
 
 # Update admin's password
 
-argocd --insecure --grpc-web --server ${ARGOCD_ROUTE}:443 account update-password --current-password ${ARGOCD_SERVER_PASSWORD} --new-password
+read -s -p "Password: " NEW-PASSWORD
+
+argocd --insecure --grpc-web --server ${ARGOCD_ROUTE}:443 account update-password --current-password ${ARGOCD_SERVER_PASSWORD} --new-password $NEW-PASSWORD

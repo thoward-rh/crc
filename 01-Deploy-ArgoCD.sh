@@ -1,3 +1,4 @@
+#!/bin/bash
 # Create a new namespace for ArgoCD components
 
 oc create namespace argocd
